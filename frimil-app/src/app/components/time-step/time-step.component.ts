@@ -1,7 +1,17 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavigationService, BreadcrumbItem } from '../../services/navigation.service';
+import {
+  NavigationService,
+  BreadcrumbItem,
+} from '../../core/services/navigation.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,8 +22,8 @@ import { Subscription } from 'rxjs';
     <div class="time-step">
       <div class="breadcrumb">
         <ng-container *ngFor="let item of breadcrumbItems; let last = last">
-          <span 
-            class="breadcrumb-item" 
+          <span
+            class="breadcrumb-item"
             [class.current]="item.isActive"
             [class.clickable]="!item.isActive"
             (click)="!item.isActive && navigateToItem(item)"
@@ -21,7 +31,16 @@ import { Subscription } from 'rxjs';
             {{ item.label }}
           </span>
           <div class="breadcrumb-icon" *ngIf="!last">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <polyline points="9,18 15,12 9,6"></polyline>
             </svg>
           </div>
@@ -29,7 +48,7 @@ import { Subscription } from 'rxjs';
       </div>
     </div>
   `,
-  styleUrls: ['./time-step.component.scss']
+  styleUrls: ['./time-step.component.scss'],
 })
 export class TimeStepComponent implements OnInit, OnDestroy {
   @Input() previousRoute: string = 'Menu Principal';
@@ -48,7 +67,7 @@ export class TimeStepComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Usar breadcrumb dinâmico do serviço
     this.subscription.add(
-      this.navigationService.breadcrumb$.subscribe(items => {
+      this.navigationService.breadcrumb$.subscribe((items) => {
         this.breadcrumbItems = items;
       })
     );
@@ -67,4 +86,4 @@ export class TimeStepComponent implements OnInit, OnDestroy {
     this.previousRouteClick.emit();
     this.router.navigate([this.previousRoutePath]);
   }
-} 
+}

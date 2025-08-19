@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icons/icon.component';
-import { NavigationService } from '../../services/navigation.service';
+import { NavigationService } from '../../core/services/navigation.service';
 
 @Component({
   selector: 'app-side-menu',

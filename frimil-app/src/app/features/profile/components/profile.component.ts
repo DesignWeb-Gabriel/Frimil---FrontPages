@@ -6,15 +6,15 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { NavigationService } from '../../services/navigation.service';
+import { NavigationService } from '../../../core/services/navigation.service';
 import {
   BaseLayoutComponent,
   ActionButton,
-} from '../../shared/components/base-layout/base-layout.component';
+} from '../../../shared/components/base-layout/base-layout.component';
 import {
   FormFieldComponent,
   SelectOption,
-} from '../../shared/components/form-field/form-field.component';
+} from '../../../shared/components/form-field/form-field.component';
 
 interface UserProfile {
   id: number;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Pecuarista, PecuaristaForm } from '../models/pecuarista.model';
+import { Pecuarista, PecuaristaForm } from '../../models/pecuarista.model';
 
 @Injectable({
   providedIn: 'root'

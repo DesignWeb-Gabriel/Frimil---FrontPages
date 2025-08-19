@@ -8,9 +8,9 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadComponent: () =>
-      import('./pages/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
+    loadChildren: () =>
+      import('./features/dashboard/dashboard.routes').then(
+        (m) => m.DASHBOARD_ROUTES
       ),
   },
   {
@@ -22,31 +22,27 @@ export const routes: Routes = [
   },
   {
     path: 'fazenda',
-    loadComponent: () =>
-      import('./pages/fazenda/fazenda.component').then(
-        (m) => m.FazendaComponent
-      ),
+    loadChildren: () =>
+      import('./features/fazenda/fazenda.routes').then((m) => m.FAZENDA_ROUTES),
   },
   {
     path: 'pesador-gado',
-    loadComponent: () =>
-      import('./pages/pesador-gado/pesador-gado.component').then(
-        (m) => m.PesadorGadoComponent
+    loadChildren: () =>
+      import('./features/pesador-gado/pesador-gado.routes').then(
+        (m) => m.PESADOR_GADO_ROUTES
       ),
   },
   {
     path: 'transportador',
-    loadComponent: () =>
-      import('./pages/transportador/transportador.component').then(
-        (m) => m.TransportadorComponent
+    loadChildren: () =>
+      import('./features/transportador/transportador.routes').then(
+        (m) => m.TRANSPORTADOR_ROUTES
       ),
   },
   {
     path: 'profile',
-    loadComponent: () =>
-      import('./pages/profile/profile.component').then(
-        (m) => m.ProfileComponent
-      ),
+    loadChildren: () =>
+      import('./features/profile/profile.routes').then((m) => m.PROFILE_ROUTES),
   },
   {
     path: '**',

@@ -1,31 +1,33 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavigationService } from '../../services/navigation.service';
-import { IconComponent } from '../../components/icons/icon.component';
-import { BaseLayoutComponent, ActionButton } from '../../shared/components/base-layout/base-layout.component';
+import { NavigationService } from '../../../core/services/navigation.service';
+import { IconComponent } from '../../../components/icons/icon.component';
+import {
+  BaseLayoutComponent,
+  ActionButton,
+} from '../../../shared/components/base-layout/base-layout.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    CommonModule,
-    BaseLayoutComponent,
-    IconComponent,
-  ],
+  imports: [CommonModule, BaseLayoutComponent, IconComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <app-base-layout 
-      pageTitle="Dashboard" 
+    <app-base-layout
+      pageTitle="Dashboard"
       pageIcon="dashboard"
-      [actions]="pageActions">
-      
+      [actions]="pageActions"
+    >
       <!-- Conteúdo do Dashboard -->
       <div class="dashboard-content">
         <div class="welcome-card">
           <h2>Bem-vindo ao FRIMIL</h2>
-          <p>Sistema de gerenciamento para pecuaristas, fazendas e transportadores.</p>
-          
+          <p>
+            Sistema de gerenciamento para pecuaristas, fazendas e
+            transportadores.
+          </p>
+
           <div class="quick-actions">
             <h3>Ações Rápidas:</h3>
             <div class="action-grid">
@@ -92,14 +94,14 @@ export class DashboardComponent implements OnInit {
       '/fazenda': 'Fazenda',
       '/pesador-gado': 'Pesador de Gado',
       '/transportador': 'Transportador',
-      '/dashboard': 'Dashboard'
+      '/dashboard': 'Dashboard',
     };
 
     const pageName = pageNames[route] || 'Página';
-    
+
     // Atualizar breadcrumb antes de navegar
     this.navigationService.navigateToPage(pageName, route);
-    
+
     // Navegar para a rota
     this.router.navigate([route]);
   }

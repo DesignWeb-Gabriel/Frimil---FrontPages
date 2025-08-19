@@ -9,7 +9,7 @@ import {
 import { PecuaristaService } from '../services/pecuarista.service';
 import { PecuaristaForm } from '../models/pecuarista.model';
 
-import { NavigationService } from '../../../services/navigation.service';
+import { NavigationService } from '../../../core/services/navigation.service';
 import {
   BaseLayoutComponent,
   ActionButton,

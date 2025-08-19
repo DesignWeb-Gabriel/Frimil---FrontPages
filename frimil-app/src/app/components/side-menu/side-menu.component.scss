@@ -11,22 +11,20 @@
 }
 
 .logo {
-  padding: 24px 24px;
-}
+  padding: 24px;
 
-.logo-image {
-  width: 180px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  max-width: 100%;
+  &-image {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
 
-  // Garante que todos os paths do SVG sejam visíveis
-  path {
-    fill: white;
-
-    &[fill="#EC1C25"] {
-      fill: #ec1c25; // Mantém a cor vermelha do BEEF
+    path {
+      fill: white;
+      &[fill="#EC1C25"] {
+        fill: #ec1c25;
+      }
     }
   }
 }
@@ -49,10 +47,14 @@
   &:hover {
     background-color: var(--color-sidebar-hover);
   }
-
   &.active {
     background-color: var(--color-sidebar-active);
     border-left-color: var(--color-secondary);
+  }
+
+  span {
+    font-size: 14px;
+    font-weight: 500;
   }
 }
 
@@ -65,17 +67,11 @@
   align-items: center;
   justify-content: center;
 
-  // Estilo específico para ícones Lucide
   i-lucide {
     width: 20px;
     height: 20px;
     color: white;
   }
-}
-
-.nav-item span {
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .divider {
@@ -114,27 +110,26 @@
 .user-details {
   flex: 1;
   min-width: 0;
+
+  .user-name {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-email {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
-.user-name {
-  color: white;
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.user-email {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 11px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-// Estilos melhorados para o footer menu
 .user-actions {
   position: relative;
 }
@@ -155,7 +150,6 @@
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
   }
-
   &:active {
     background-color: rgba(255, 255, 255, 0.15);
   }
@@ -163,7 +157,6 @@
   &[aria-expanded="true"] {
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
-
     .menu-icon {
       transform: rotate(90deg);
     }
@@ -178,7 +171,6 @@
   justify-content: center;
   transition: transform 0.3s ease;
 
-  // Estilo específico para ícones Lucide
   i-lucide {
     width: 16px;
     height: 16px;
@@ -186,7 +178,6 @@
   }
 }
 
-// Dropdown Menu
 .user-dropdown-menu {
   position: absolute;
   bottom: 100%;
@@ -200,70 +191,39 @@
   margin-bottom: 6px;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px) scale(0.95);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1001;
-  backdrop-filter: blur(20px);
+  transform: translateY(10px);
+  transition: all 0.2s ease;
 
   &.open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0) scale(1);
-  }
-
-  // Seta do dropdown - mais sutil
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    right: 18px;
-    width: 8px;
-    height: 8px;
-    background-color: rgba(42, 42, 42, 0.95);
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transform: rotate(45deg);
-    z-index: -1;
+    transform: translateY(0);
   }
 }
 
 .dropdown-item {
   display: flex;
   align-items: center;
+  gap: 8px;
   width: 100%;
-  padding: 10px 14px;
+  padding: 8px 12px;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.9);
-  text-align: left;
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
-  transition: all 0.15s ease;
   font-size: 13px;
-  font-weight: 400;
+  transition: background-color 0.2s ease;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
   }
 
-  &:active {
-    background-color: rgba(255, 255, 255, 0.12);
-  }
-
   &.logout-item {
-    color: rgba(255, 107, 107, 0.9);
-
+    color: #ff6b6b;
     &:hover {
-      background-color: rgba(255, 107, 107, 0.08);
-      color: #ff6b6b;
-    }
-
-    .dropdown-icon i-lucide {
-      color: rgba(255, 107, 107, 0.9);
-    }
-
-    &:hover .dropdown-icon i-lucide {
-      color: #ff6b6b;
+      background-color: rgba(255, 107, 107, 0.1);
+      color: #ff5252;
     }
   }
 }
@@ -271,7 +231,6 @@
 .dropdown-icon {
   width: 16px;
   height: 16px;
-  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,144 +238,11 @@
   i-lucide {
     width: 16px;
     height: 16px;
-    color: rgba(255, 255, 255, 0.7);
-    transition: color 0.15s ease;
   }
 }
 
 .dropdown-divider {
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.1);
   margin: 4px 0;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .side-menu {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-
-  .user-dropdown-menu {
-    // Em mobile, o dropdown aparece acima do footer
-    bottom: 100%;
-    right: 0;
-    left: auto;
-    min-width: 160px;
-    margin-bottom: 8px;
-
-    // Ajustar posição da seta
-    &::after {
-      right: 16px;
-    }
-  }
-
-  .user-info {
-    // Melhorar layout em mobile
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .user-details {
-    min-width: 0; // Permite que o texto seja truncado se necessário
-  }
-
-  .user-name {
-    font-size: 13px;
-  }
-
-  .user-email {
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 480px) {
-  .menu-footer {
-    padding: 14px 16px;
-  }
-
-  .user-dropdown-menu {
-    min-width: 150px;
-
-    &::after {
-      right: 14px;
-    }
-  }
-
-  .dropdown-item {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-
-  .dropdown-icon {
-    width: 14px;
-    height: 14px;
-    margin-right: 8px;
-
-    i-lucide {
-      width: 14px;
-      height: 14px;
-    }
-  }
-
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 12px;
-  }
-
-  .user-name {
-    font-size: 12px;
-  }
-
-  .user-email {
-    font-size: 10px;
-  }
-}
-
-// Melhorias de acessibilidade
-@media (prefers-reduced-motion: reduce) {
-  .menu-toggle-btn,
-  .menu-icon,
-  .user-dropdown-menu,
-  .dropdown-item {
-    transition: none;
-  }
-
-  .menu-toggle-btn:hover {
-    transform: none;
-  }
-
-  .dropdown-item:active {
-    transform: none;
-  }
-}
-
-// Modo escuro aprimorado
-@media (prefers-color-scheme: dark) {
-  .user-dropdown-menu {
-    background-color: rgba(26, 26, 26, 0.95);
-    border-color: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-
-    &::after {
-      background-color: rgba(26, 26, 26, 0.95);
-      border-color: rgba(255, 255, 255, 0.05);
-    }
-  }
-
-  .dropdown-divider {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-
-  .menu-footer {
-    background: rgba(0, 0, 0, 0.3);
-    border-top-color: rgba(255, 255, 255, 0.05);
-  }
-
-  .user-avatar {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.05);
-  }
 }
