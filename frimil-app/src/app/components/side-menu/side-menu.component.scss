@@ -85,65 +85,98 @@
 }
 
 .menu-footer {
-  padding: 20px;
-  border-top: 1px solid var(--color-divider);
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .user-info {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 8px 0;
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
-  background-color: var(--color-secondary);
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user-details {
   flex: 1;
+  min-width: 0;
 }
 
 .user-name {
   color: white;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-email {
-  color: #999;
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.logout-btn {
+// Estilos melhorados para o footer menu
+.user-actions {
+  position: relative;
+}
+
+.menu-toggle-btn {
   background: none;
   border: none;
-  color: white;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  padding: 8px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    background-color: var(--color-sidebar-hover);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+
+  &[aria-expanded="true"] {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+
+    .menu-icon {
+      transform: rotate(90deg);
+    }
   }
 }
 
-.logout-icon {
+.menu-icon {
   width: 16px;
   height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.3s ease;
 
   // Estilo específico para ícones Lucide
   i-lucide {
@@ -153,11 +186,237 @@
   }
 }
 
+// Dropdown Menu
+.user-dropdown-menu {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  min-width: 180px;
+  background-color: rgba(42, 42, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  padding: 4px 0;
+  margin-bottom: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(0.95);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1001;
+  backdrop-filter: blur(20px);
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  // Seta do dropdown - mais sutil
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    right: 18px;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(42, 42, 42, 0.95);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  font-weight: 400;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: white;
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  &.logout-item {
+    color: rgba(255, 107, 107, 0.9);
+
+    &:hover {
+      background-color: rgba(255, 107, 107, 0.08);
+      color: #ff6b6b;
+    }
+
+    .dropdown-icon i-lucide {
+      color: rgba(255, 107, 107, 0.9);
+    }
+
+    &:hover .dropdown-icon i-lucide {
+      color: #ff6b6b;
+    }
+  }
+}
+
+.dropdown-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i-lucide {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.15s ease;
+  }
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .side-menu {
     width: 100%;
     height: auto;
     position: relative;
+  }
+
+  .user-dropdown-menu {
+    // Em mobile, o dropdown aparece acima do footer
+    bottom: 100%;
+    right: 0;
+    left: auto;
+    min-width: 160px;
+    margin-bottom: 8px;
+
+    // Ajustar posição da seta
+    &::after {
+      right: 16px;
+    }
+  }
+
+  .user-info {
+    // Melhorar layout em mobile
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .user-details {
+    min-width: 0; // Permite que o texto seja truncado se necessário
+  }
+
+  .user-name {
+    font-size: 13px;
+  }
+
+  .user-email {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-footer {
+    padding: 14px 16px;
+  }
+
+  .user-dropdown-menu {
+    min-width: 150px;
+
+    &::after {
+      right: 14px;
+    }
+  }
+
+  .dropdown-item {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .dropdown-icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+
+    i-lucide {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .user-name {
+    font-size: 12px;
+  }
+
+  .user-email {
+    font-size: 10px;
+  }
+}
+
+// Melhorias de acessibilidade
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle-btn,
+  .menu-icon,
+  .user-dropdown-menu,
+  .dropdown-item {
+    transition: none;
+  }
+
+  .menu-toggle-btn:hover {
+    transform: none;
+  }
+
+  .dropdown-item:active {
+    transform: none;
+  }
+}
+
+// Modo escuro aprimorado
+@media (prefers-color-scheme: dark) {
+  .user-dropdown-menu {
+    background-color: rgba(26, 26, 26, 0.95);
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+
+    &::after {
+      background-color: rgba(26, 26, 26, 0.95);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .dropdown-divider {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .menu-footer {
+    background: rgba(0, 0, 0, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .user-avatar {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.05);
   }
 }

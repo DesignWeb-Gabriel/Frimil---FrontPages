@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icons/icon.component';
@@ -130,9 +130,56 @@ import { NavigationService } from '../../services/navigation.service';
             <div class="user-name">{{ currentUser.nome }}</div>
             <div class="user-email">{{ currentUser.email }}</div>
           </div>
-          <button class="logout-btn">
-            <app-icon name="more-vertical" class="logout-icon"></app-icon>
-          </button>
+          <div class="user-actions" #userActionsRef>
+            <button
+              class="menu-toggle-btn"
+              (click)="toggleUserMenu($event)"
+              [attr.aria-expanded]="isUserMenuOpen"
+              aria-label="Abrir menu do usuário"
+            >
+              <app-icon name="more-vertical" class="menu-icon"></app-icon>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div
+              class="user-dropdown-menu"
+              [class.open]="isUserMenuOpen"
+              role="menu"
+              aria-label="Menu de opções do usuário"
+            >
+              <button
+                class="dropdown-item"
+                (click)="openProfile()"
+                role="menuitem"
+                tabindex="0"
+              >
+                <app-icon name="user" class="dropdown-icon"></app-icon>
+                <span>Meu Perfil</span>
+              </button>
+
+              <button
+                class="dropdown-item"
+                (click)="openSettings()"
+                role="menuitem"
+                tabindex="0"
+              >
+                <app-icon name="settings" class="dropdown-icon"></app-icon>
+                <span>Configurações</span>
+              </button>
+
+              <div class="dropdown-divider" role="separator"></div>
+
+              <button
+                class="dropdown-item logout-item"
+                (click)="logout()"
+                role="menuitem"
+                tabindex="0"
+              >
+                <app-icon name="log-out" class="dropdown-icon"></app-icon>
+                <span>Sair</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -140,12 +187,16 @@ import { NavigationService } from '../../services/navigation.service';
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent {
+  @ViewChild('userActionsRef') userActionsRef!: ElementRef;
+
   currentUser = {
     id: 1,
     nome: 'Felipe Admin',
     email: 'mail@example.com',
     iniciais: 'FA',
   };
+
+  isUserMenuOpen = false;
 
   constructor(
     private router: Router,
@@ -173,5 +224,55 @@ export class SideMenuComponent {
 
   isActive(route: string): boolean {
     return this.router.url.includes(route);
+  }
+
+  toggleUserMenu(event: Event): void {
+    event.stopPropagation();
+    this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    if (
+      this.userActionsRef &&
+      !this.userActionsRef.nativeElement.contains(event.target)
+    ) {
+      this.isUserMenuOpen = false;
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    this.isUserMenuOpen = false;
+  }
+
+  openProfile(): void {
+    this.isUserMenuOpen = false;
+    // Implementar navegação para perfil
+    console.log('Abrindo perfil do usuário');
+    // this.router.navigate(['/profile']);
+  }
+
+  openSettings(): void {
+    this.isUserMenuOpen = false;
+    // Implementar navegação para configurações
+    console.log('Abrindo configurações');
+    // this.router.navigate(['/settings']);
+  }
+
+  logout(): void {
+    this.isUserMenuOpen = false;
+    // Implementar lógica de logout
+    console.log('Fazendo logout do usuário');
+
+    // Exemplo de implementação de logout
+    if (confirm('Tem certeza que deseja sair?')) {
+      // Limpar dados do usuário, tokens, etc.
+      localStorage.removeItem('user_token');
+      sessionStorage.clear();
+
+      // Redirecionar para página de login
+      this.router.navigate(['/login']);
+    }
   }
 }
