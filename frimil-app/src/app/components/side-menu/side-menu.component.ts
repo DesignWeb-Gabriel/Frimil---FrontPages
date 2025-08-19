@@ -248,9 +248,8 @@ export class SideMenuComponent {
 
   openProfile(): void {
     this.isUserMenuOpen = false;
-    // Implementar navegação para perfil
-    console.log('Abrindo perfil do usuário');
-    // this.router.navigate(['/profile']);
+    // Navegar para a página de perfil
+    this.router.navigate(['/profile']);
   }
 
   openSettings(): void {
