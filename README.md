@@ -20,7 +20,7 @@ frontend/
 │   │   │   ├── side-menu/
 │   │   │   ├── time-step/
 │   │   │   └── footer-menu/
-│   │   ├── pages/
+│   │   ├── features/
 │   │   │   ├── pecuarista/
 │   │   │   ├── fazenda/
 │   │   │   ├── pesador-gado/

@@ -12,7 +12,13 @@ import {
 } from '@angular/forms';
 import { IconComponent } from '../../../components/icons/icon.component';
 
-export type FormFieldType = 'text' | 'email' | 'select' | 'textarea';
+export type FormFieldType =
+  | 'text'
+  | 'email'
+  | 'select'
+  | 'textarea'
+  | 'number'
+  | 'date';
 
 export interface SelectOption {
   value: string;
@@ -40,9 +46,14 @@ export interface SelectOption {
           <app-icon [name]="icon"></app-icon>
         </div>
 
-        <!-- Input Text/Email -->
+        <!-- Input Text/Email/Number/Date -->
         <input
-          *ngIf="type === 'text' || type === 'email'"
+          *ngIf="
+            type === 'text' ||
+            type === 'email' ||
+            type === 'number' ||
+            type === 'date'
+          "
           [id]="fieldId"
           [type]="type"
           [placeholder]="placeholder"

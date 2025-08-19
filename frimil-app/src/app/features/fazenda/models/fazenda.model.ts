@@ -1,28 +1,40 @@
 export interface Fazenda {
   id?: number;
-  nome: string;
+  nomeFazenda: string;
   proprietario: string;
-  cnpj?: string;
-  cep: string;
-  estado: string;
-  cidade: string;
+  cpfCnpj: string;
+  inscricaoEstadual?: string;
   endereco: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  telefone: string;
+  email?: string;
   areaTotal: number;
-  areaPlantada?: number;
+  areaPastagem: number;
+  capacidadeRebanho: number;
+  tipoPropriedade: 'Própria' | 'Arrendada' | 'Parceria';
+  certificacoes: string | string[];
   observacoes?: string;
   dataCadastro?: Date;
   dataAtualizacao?: Date;
 }
 
 export interface FazendaForm {
-  nome: string;
+  nomeFazenda: string;
   proprietario: string;
-  cnpj?: string;
-  cep: string;
-  estado: string;
-  cidade: string;
+  cpfCnpj: string;
+  inscricaoEstadual?: string;
   endereco: string;
+  cidade: string;
+  estado: string;
+  cep: string;
+  telefone: string;
+  email?: string;
   areaTotal: number;
-  areaPlantada?: number;
+  areaPastagem: number;
+  capacidadeRebanho: number;
+  tipoPropriedade: 'Própria' | 'Arrendada' | 'Parceria';
+  certificacoes: string | string[];
   observacoes?: string;
 }
