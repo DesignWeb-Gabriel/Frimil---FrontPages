@@ -1,0 +1,113 @@
+/* Cabeçalho da página */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-primary);
+}
+
+.page-title h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-button-border);
+  border: 1px solid var(--color-button-border);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-button-border);
+    color: white;
+  }
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: #d41920;
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: #232525;
+  }
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .action-buttons {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .btn {
+    flex: 1;
+    min-width: 120px;
+  }
+}

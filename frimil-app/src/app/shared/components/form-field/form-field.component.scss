@@ -1,0 +1,217 @@
+/* FormField Component - Reutilizável em toda aplicação */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+label {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 14px;
+  letter-spacing: 0.01em;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #9ca3af;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  pointer-events: none;
+
+  app-icon {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      vertical-align: middle;
+    }
+  }
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 16px 16px 16px 52px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--color-text);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-sizing: border-box;
+  margin: 0;
+
+  &::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+  }
+
+  &:focus {
+    border-color: var(--color-primary);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(5, 7, 7, 0.1);
+
+    ~ .input-icon {
+      color: var(--color-primary);
+    }
+  }
+
+  &:hover:not(:focus):not(.error) {
+    border-color: #d1d5db;
+    background-color: #fafafa;
+  }
+
+  &:not(:placeholder-shown) {
+    background-color: #ffffff;
+    border-color: #d1d5db;
+
+    ~ .input-icon {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  &.error {
+    border-color: #f87171;
+    background-color: #fef2f2;
+
+    &:focus {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    ~ .input-icon {
+      color: #f87171;
+    }
+  }
+
+  &:disabled {
+    background-color: #f9fafb;
+    border-color: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+
+    ~ .input-icon {
+      color: #d1d5db;
+    }
+  }
+}
+
+/* Ajustes para campos sem ícone */
+.input-wrapper:not(:has(.input-icon)) {
+  input,
+  select,
+  textarea {
+    padding-left: 16px;
+  }
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+  padding-top: 16px;
+  line-height: 1.6;
+  font-family: "Poppins", sans-serif;
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px;
+  padding-right: 48px;
+
+  &:focus {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23050707' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  }
+
+  option {
+    padding: 12px 16px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+  }
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.2s ease;
+  margin: 0;
+  padding: 0;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &::before {
+    content: "⚠";
+    font-size: 12px;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Previne zoom no iOS */
+  }
+}
+
+/* Ajuste específico para textarea - ícone no topo */
+.form-field:has(textarea) .input-icon {
+  top: 20px;
+  transform: none;
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

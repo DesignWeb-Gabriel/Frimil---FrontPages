@@ -1,0 +1,163 @@
+.side-menu {
+  width: 280px;
+  height: 100vh;
+  background-color: var(--color-sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  padding: 24px 24px;
+}
+
+.logo-image {
+  width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+
+  // Garante que todos os paths do SVG sejam visíveis
+  path {
+    fill: white;
+
+    &[fill="#EC1C25"] {
+      fill: #ec1c25; // Mantém a cor vermelha do BEEF
+    }
+  }
+}
+
+.nav-menu {
+  flex: 1;
+  padding: 20px 0;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-left: 3px solid transparent;
+
+  &:hover {
+    background-color: var(--color-sidebar-hover);
+  }
+
+  &.active {
+    background-color: var(--color-sidebar-active);
+    border-left-color: var(--color-secondary);
+  }
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Estilo específico para ícones Lucide
+  i-lucide {
+    width: 20px;
+    height: 20px;
+    color: white;
+  }
+}
+
+.nav-item span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.divider {
+  height: 2px;
+  background-color: var(--color-divider);
+  margin: 0 20px;
+}
+
+.menu-footer {
+  padding: 20px;
+  border-top: 1px solid var(--color-divider);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.user-email {
+  color: #999;
+  font-size: 12px;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-sidebar-hover);
+  }
+}
+
+.logout-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Estilo específico para ícones Lucide
+  i-lucide {
+    width: 16px;
+    height: 16px;
+    color: white;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .side-menu {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+}
