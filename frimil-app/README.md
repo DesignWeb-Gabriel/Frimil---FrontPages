@@ -7,7 +7,7 @@
 
 ## 📋 Descrição
 
-O **FRIMIL** é um sistema moderno de gestão pecuária desenvolvido em **Angular 20**, focado na gestão integrada de pecuaristas, fazendas, pesadores de gado e transportadores. O sistema oferece uma interface intuitiva e responsiva para otimizar os processos da cadeia pecuária.
+A **FRIMIL** é um sistema moderno de gestão pecuária desenvolvido em **Angular 20**, focado na gestão integrada de pecuaristas, fazendas, pesadores de gado e transportadores. O sistema oferece uma interface intuitiva e responsiva para otimizar os processos da cadeia pecuária.
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -23,8 +23,6 @@ O **FRIMIL** é um sistema moderno de gestão pecuária desenvolvido em **Angula
 ### Ferramentas de Desenvolvimento
 
 - **Angular CLI 20.1.3** - Ferramentas de desenvolvimento
-- **Karma & Jasmine** - Testes unitários
-- **Express 5.1.0** - Servidor de desenvolvimento
 
 ## 📁 Estrutura do Projeto
 
@@ -280,9 +278,8 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 
 ## 📞 Suporte
 
-- **Email**: suporte@frimil.com.br
+- **Email**: plane.dsg@gmail.com
 - **Issues**: [GitHub Issues](link-para-issues)
-- **Documentação**: [Wiki do Projeto](link-para-wiki)
 
 ## 🔄 Changelog
 
@@ -314,6 +311,6 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 ---
 
 <div align="center">
-  <p>Desenvolvido com ❤️ pela equipe FRIMIL</p>
-  <p><strong>Versão atual:</strong> 1.0.0 | <strong>Última atualização:</strong> Dezembro 2024</p>
+  <p>Desenvolvido com ❤️ pelo time Gabriel Rodrigues e Vinicius Oliveira</p>
+  <p><strong>Versão atual:</strong> 1.0.0 | <strong>Última atualização:</strong>Agosto 2025</p>
 </div>

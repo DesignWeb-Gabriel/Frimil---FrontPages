@@ -526,5 +526,5 @@ npm update
 
 ---
 
-**Última atualização**: Dezembro 2024
+**Última atualização**: Agosto 2025
 **Versão**: 1.0.0

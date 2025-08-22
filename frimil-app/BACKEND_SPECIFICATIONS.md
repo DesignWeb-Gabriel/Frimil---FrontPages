@@ -543,11 +543,11 @@ POST /webhooks/audit
 
 Para dúvidas sobre o frontend ou integração:
 
-- **Email**: dev@frimil.com.br
+- **Email**: plane.dsg@gmail.com
 - **Documentação**: [Link para documentação]
 - **Repositório**: [Link para repositório]
 
 ---
 
-**Última atualização**: Dezembro 2024
+**Última atualização**: Agosto 2025
 **Versão**: 1.0.0
