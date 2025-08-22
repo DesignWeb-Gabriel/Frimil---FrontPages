@@ -1,4 +1,4 @@
-.login-container {
+.register-container {
   display: flex;
   height: 100vh;
   background-color: #f5f5f5;
@@ -6,13 +6,13 @@
 }
 
 // Coluna Esquerda - Formulário
-.login-form-section {
+.register-form-section {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: white;
-  padding: 40px;
+  padding: 30px;
   max-width: 500px;
   overflow-y: auto;
   height: 100vh;
@@ -21,33 +21,33 @@
 .form-container {
   width: 100%;
   max-width: 400px;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 
 .logo-container {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   .logo-image {
-    height: 60px;
+    height: 50px;
     width: auto;
     max-width: 100%;
   }
 }
 
-.login-title {
-  font-size: 22px;
+.register-title {
+  font-size: 20px;
   font-weight: 700;
   color: var(--color-primary);
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   line-height: 1.2;
 }
 
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
 .form-group {
@@ -71,7 +71,7 @@
 
 .form-input {
   width: 100%;
-  padding: 14px 48px 14px 16px;
+  padding: 12px 48px 12px 16px;
   border: 2px solid #e5e7eb;
   border-radius: 8px;
   font-size: 16px;
@@ -139,27 +139,9 @@
   margin-top: 4px;
 }
 
-.forgot-password {
-  text-align: right;
-  margin-top: -8px;
-}
-
-.forgot-link {
-  font-size: 14px;
-  color: var(--color-secondary);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #d91a23;
-    text-decoration: underline;
-  }
-}
-
-.login-button {
+.register-button {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   background-color: var(--color-primary);
   color: white;
   border: none;
@@ -171,7 +153,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
+  min-height: 44px;
 
   &:hover:not(:disabled) {
     background-color: #000000;
@@ -207,7 +189,7 @@
 .separator {
   position: relative;
   text-align: center;
-  margin: 18px 0;
+  margin: 14px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -234,9 +216,9 @@
   }
 }
 
-.register-button {
+.login-button {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   background-color: white;
   color: var(--color-primary);
   border: 2px solid var(--color-primary);
@@ -245,7 +227,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-height: 48px;
+  min-height: 44px;
 
   &:hover {
     background-color: var(--color-primary);
@@ -262,7 +244,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 30px;
   position: relative;
   overflow: hidden;
   height: 100vh;
@@ -274,18 +256,18 @@
 }
 
 .branding-title {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--color-primary);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   line-height: 1.2;
 }
 
 .main-logo {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 
   .main-logo-image {
-    height: 100px;
+    height: 80px;
     width: auto;
     max-width: 100%;
   }
@@ -307,13 +289,13 @@
 
 // Responsive Design
 @media (max-width: 1024px) {
-  .login-container {
+  .register-container {
     flex-direction: column;
     height: auto;
     overflow: visible;
   }
 
-  .login-form-section {
+  .register-form-section {
     max-width: none;
     padding: 32px 24px;
     height: auto;
@@ -337,7 +319,7 @@
 }
 
 @media (max-width: 768px) {
-  .login-form-section {
+  .register-form-section {
     padding: 24px 20px;
   }
 
@@ -346,7 +328,7 @@
     min-height: 250px;
   }
 
-  .login-title {
+  .register-title {
     font-size: 20px;
     margin-bottom: 24px;
   }
@@ -365,8 +347,8 @@
     font-size: 14px;
   }
 
-  .login-button,
-  .register-button {
+  .register-button,
+  .login-button {
     padding: 12px;
     font-size: 14px;
     min-height: 44px;
@@ -374,7 +356,7 @@
 }
 
 @media (max-width: 480px) {
-  .login-form-section {
+  .register-form-section {
     padding: 20px 16px;
   }
 
@@ -410,7 +392,7 @@
 }
 
 // Animações
-.login-form-section {
+.register-form-section {
   animation: slideInLeft 0.6s ease-out;
 }
 

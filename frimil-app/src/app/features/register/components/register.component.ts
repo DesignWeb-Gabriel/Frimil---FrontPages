@@ -12,13 +12,13 @@ import { NotificationService } from '../../../core/services/notification.service
 import { IconComponent } from '../../../components/icons/icon.component';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, IconComponent],
   template: `
-    <div class="login-container">
+    <div class="register-container">
       <!-- Coluna Esquerda - Formulário -->
-      <div class="login-form-section">
+      <div class="register-form-section">
         <div class="form-container">
           <!-- Logo -->
           <div class="logo-container">
@@ -30,14 +30,33 @@ import { IconComponent } from '../../../components/icons/icon.component';
           </div>
 
           <!-- Título -->
-          <h1 class="login-title">Fazer o login com sua conta</h1>
+          <h1 class="register-title">Criar uma nova conta</h1>
 
           <!-- Formulário -->
           <form
-            [formGroup]="loginForm"
+            [formGroup]="registerForm"
             (ngSubmit)="onSubmit()"
-            class="login-form"
+            class="register-form"
           >
+            <!-- Nome -->
+            <div class="form-group">
+              <label for="name" class="form-label">Nome Completo</label>
+              <div class="input-container">
+                <input
+                  type="text"
+                  id="name"
+                  formControlName="name"
+                  class="form-input"
+                  placeholder="Digite seu nome completo"
+                  [class.error]="isFieldInvalid('name')"
+                />
+                <app-icon name="user" class="input-icon"></app-icon>
+              </div>
+              <div class="error-message" *ngIf="isFieldInvalid('name')">
+                {{ getFieldError('name') }}
+              </div>
+            </div>
+
             <!-- Email -->
             <div class="form-group">
               <label for="email" class="form-label">Email Address</label>
@@ -66,7 +85,7 @@ import { IconComponent } from '../../../components/icons/icon.component';
                   id="password"
                   formControlName="password"
                   class="form-input"
-                  placeholder="Entrar com sua senha"
+                  placeholder="Criar uma senha"
                   [class.error]="isFieldInvalid('password')"
                 />
                 <button
@@ -88,18 +107,49 @@ import { IconComponent } from '../../../components/icons/icon.component';
               </div>
             </div>
 
-            <!-- Esqueceu a senha -->
-            <div class="forgot-password">
-              <a href="#" class="forgot-link">Esqueceu a sua senha?</a>
+            <!-- Confirmar Senha -->
+            <div class="form-group">
+              <label for="confirmPassword" class="form-label"
+                >Confirmar Password</label
+              >
+              <div class="input-container">
+                <input
+                  [type]="showConfirmPassword ? 'text' : 'password'"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                  class="form-input"
+                  placeholder="Confirme sua senha"
+                  [class.error]="isFieldInvalid('confirmPassword')"
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  (click)="toggleConfirmPassword()"
+                  [attr.aria-label]="
+                    showConfirmPassword ? 'Ocultar senha' : 'Mostrar senha'
+                  "
+                >
+                  <app-icon
+                    [name]="showConfirmPassword ? 'eye-off' : 'eye'"
+                    class="input-icon"
+                  ></app-icon>
+                </button>
+              </div>
+              <div
+                class="error-message"
+                *ngIf="isFieldInvalid('confirmPassword')"
+              >
+                {{ getFieldError('confirmPassword') }}
+              </div>
             </div>
 
-            <!-- Botão de Login -->
+            <!-- Botão de Cadastro -->
             <button
               type="submit"
-              class="login-button"
-              [disabled]="loginForm.invalid || isLoading"
+              class="register-button"
+              [disabled]="registerForm.invalid || isLoading"
             >
-              <span *ngIf="!isLoading">Login</span>
+              <span *ngIf="!isLoading">Cadastrar-se</span>
               <span *ngIf="isLoading" class="loading-spinner"></span>
             </button>
 
@@ -108,13 +158,13 @@ import { IconComponent } from '../../../components/icons/icon.component';
               <span class="separator-text">OU</span>
             </div>
 
-            <!-- Botão de Cadastro -->
+            <!-- Botão de Login -->
             <button
               type="button"
-              class="register-button"
-              (click)="goToRegister()"
+              class="login-button"
+              (click)="goToLogin()"
             >
-              Cadastrar-se
+              Fazer Login
             </button>
           </form>
         </div>
@@ -142,12 +192,13 @@ import { IconComponent } from '../../../components/icons/icon.component';
       </div>
     </div>
   `,
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./register.component.scss'],
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class RegisterComponent {
+  registerForm: FormGroup;
   isLoading = false;
   showPassword = false;
+  showConfirmPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -155,66 +206,56 @@ export class LoginComponent {
     private router: Router,
     private notificationService: NotificationService
   ) {
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-    });
+      confirmPassword: ['', [Validators.required]],
+    }, { validators: this.passwordMatchValidator });
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
+    if (this.registerForm.valid) {
       this.isLoading = true;
-      this.handleLogin();
+      this.handleRegister();
     } else {
       this.markFormGroupTouched();
     }
   }
 
-  private handleLogin(): void {
-    const { email, password } = this.loginForm.value;
+  private handleRegister(): void {
+    const { name, email, password } = this.registerForm.value;
 
-    this.authService.login(email, password).subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.notificationService.showSuccess(
-            'Login realizado com sucesso!',
-            'Bem-vindo ao sistema Frimil.'
-          );
-          this.router.navigate(['/dashboard']);
-        } else {
-          this.notificationService.showError(
-            'Erro no login',
-            response.message || 'Credenciais inválidas.'
-          );
-        }
-      },
-      error: (error) => {
-        this.notificationService.showError(
-          'Erro no login',
-          'Ocorreu um erro ao fazer login. Tente novamente.'
-        );
-      },
-      complete: () => {
-        this.isLoading = false;
-      },
-    });
+    // Simular cadastro - substitua por chamada real à API
+    setTimeout(() => {
+      this.notificationService.showSuccess(
+        'Cadastro realizado com sucesso!',
+        'Sua conta foi criada. Faça login para continuar.'
+      );
+      this.isLoading = false;
+      this.router.navigate(['/login']);
+    }, 1500);
   }
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 
-  goToRegister(): void {
-    this.router.navigate(['/register']);
+  toggleConfirmPassword(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
   }
 
   isFieldInvalid(fieldName: string): boolean {
-    const field = this.loginForm.get(fieldName);
+    const field = this.registerForm.get(fieldName);
     return field ? field.invalid && (field.dirty || field.touched) : false;
   }
 
   getFieldError(fieldName: string): string {
-    const field = this.loginForm.get(fieldName);
+    const field = this.registerForm.get(fieldName);
     if (field && field.errors) {
       if (field.errors['required']) {
         return 'Este campo é obrigatório.';
@@ -227,13 +268,39 @@ export class LoginComponent {
       }
     }
 
+    // Verificar erro de senhas não coincidem
+    if (
+      this.registerForm.errors &&
+      this.registerForm.errors['passwordMismatch'] &&
+      fieldName === 'confirmPassword'
+    ) {
+      return 'As senhas não coincidem.';
+    }
+
     return '';
   }
 
   private markFormGroupTouched(): void {
-    Object.keys(this.loginForm.controls).forEach((key) => {
-      const control = this.loginForm.get(key);
+    Object.keys(this.registerForm.controls).forEach((key) => {
+      const control = this.registerForm.get(key);
       control?.markAsTouched();
     });
+  }
+
+  private passwordMatchValidator(
+    form: FormGroup
+  ): { [key: string]: any } | null {
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+
+    if (
+      password &&
+      confirmPassword &&
+      password.value !== confirmPassword.value
+    ) {
+      return { passwordMismatch: true };
+    }
+
+    return null;
   }
 }

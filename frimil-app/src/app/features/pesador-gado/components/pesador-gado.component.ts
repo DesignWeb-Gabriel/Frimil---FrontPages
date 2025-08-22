@@ -400,6 +400,6 @@ export class PesadorGadoComponent implements OnInit {
   }
 
   onAddPesador(): void {
-    console.log('Adicionar novo pesador');
+    console.log('Adicionar filtro');
   }
 }

@@ -95,7 +95,7 @@ import {
                 errorMessage="Telefone é obrigatório"
               ></app-form-field>
 
-              <app-form-field
+              <!-- <app-form-field
                 label="Email"
                 type="email"
                 icon="mail"
@@ -103,7 +103,7 @@ import {
                 formControlName="email"
                 [hasError]="isFieldInvalid('email')"
                 errorMessage="Email inválido"
-              ></app-form-field>
+              ></app-form-field> -->
             </div>
 
             <!-- Coluna Direita -->

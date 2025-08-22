@@ -55,6 +55,11 @@ export const routes: Routes = [
       import('./features/login/login.routes').then((m) => m.LOGIN_ROUTES),
   },
   {
+    path: 'register',
+    loadChildren: () =>
+      import('./features/register/register.routes').then((m) => m.REGISTER_ROUTES),
+  },
+  {
     path: '**',
     redirectTo: '/dashboard',
   },

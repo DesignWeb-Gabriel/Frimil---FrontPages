@@ -4,7 +4,7 @@ import { delay } from 'rxjs/operators';
 import { Pecuarista, PecuaristaForm } from '../../models/pecuarista.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MockDataService {
   private pecuaristas: Pecuarista[] = [
@@ -18,7 +18,7 @@ export class MockDataService {
       fazenda: 'Fazenda Silva',
       observacoes: 'Pecuarista experiente com 20 anos de atividade',
       dataCadastro: new Date('2024-01-15'),
-      dataAtualizacao: new Date('2024-01-15')
+      dataAtualizacao: new Date('2024-01-15'),
     },
     {
       id: 2,
@@ -30,7 +30,7 @@ export class MockDataService {
       fazenda: 'Fazenda Três Corações',
       observacoes: 'Especializada em gado leiteiro',
       dataCadastro: new Date('2024-01-10'),
-      dataAtualizacao: new Date('2024-01-20')
+      dataAtualizacao: new Date('2024-01-20'),
     },
     {
       id: 3,
@@ -42,8 +42,8 @@ export class MockDataService {
       fazenda: 'Fazenda Boa Vista',
       observacoes: 'Foco em gado de corte premium',
       dataCadastro: new Date('2024-01-05'),
-      dataAtualizacao: new Date('2024-01-25')
-    }
+      dataAtualizacao: new Date('2024-01-25'),
+    },
   ];
 
   private fazendas: string[] = [
@@ -52,12 +52,13 @@ export class MockDataService {
     'Fazenda Boa Vista',
     'Fazenda São José',
     'Fazenda Santa Maria',
-    'Fazenda Esperança'
+    'Fazenda Esperança',
+    'Fazenda do Carmo',
   ];
 
   private nextId = 4;
 
-  constructor() { }
+  constructor() {}
 
   // Simular busca de todos os pecuaristas
   getPecuaristas(): Observable<Pecuarista[]> {
@@ -66,9 +67,9 @@ export class MockDataService {
 
   // Simular busca de pecuarista por ID
   getPecuarista(id: number): Observable<Pecuarista> {
-    const pecuarista = this.pecuaristas.find(p => p.id === id);
+    const pecuarista = this.pecuaristas.find((p) => p.id === id);
     if (pecuarista) {
-      return of({...pecuarista}).pipe(delay(300));
+      return of({ ...pecuarista }).pipe(delay(300));
     }
     return throwError(() => new Error('Pecuarista não encontrado'));
   }
@@ -79,30 +80,33 @@ export class MockDataService {
       ...pecuaristaForm,
       id: this.nextId++,
       dataCadastro: new Date(),
-      dataAtualizacao: new Date()
+      dataAtualizacao: new Date(),
     };
-    
+
     this.pecuaristas.push(novoPecuarista);
-    return of({...novoPecuarista}).pipe(delay(800));
+    return of({ ...novoPecuarista }).pipe(delay(800));
   }
 
   // Simular atualização de pecuarista
-  updatePecuarista(id: number, pecuaristaForm: PecuaristaForm): Observable<Pecuarista> {
-    const index = this.pecuaristas.findIndex(p => p.id === id);
+  updatePecuarista(
+    id: number,
+    pecuaristaForm: PecuaristaForm
+  ): Observable<Pecuarista> {
+    const index = this.pecuaristas.findIndex((p) => p.id === id);
     if (index !== -1) {
       this.pecuaristas[index] = {
         ...this.pecuaristas[index],
         ...pecuaristaForm,
-        dataAtualizacao: new Date()
+        dataAtualizacao: new Date(),
       };
-      return of({...this.pecuaristas[index]}).pipe(delay(600));
+      return of({ ...this.pecuaristas[index] }).pipe(delay(600));
     }
     return throwError(() => new Error('Pecuarista não encontrado'));
   }
 
   // Simular exclusão de pecuarista
   deletePecuarista(id: number): Observable<void> {
-    const index = this.pecuaristas.findIndex(p => p.id === id);
+    const index = this.pecuaristas.findIndex((p) => p.id === id);
     if (index !== -1) {
       this.pecuaristas.splice(index, 1);
       return of(void 0).pipe(delay(400));
@@ -123,10 +127,19 @@ export class MockDataService {
   }
 
   private generateCSV(): string {
-    const headers = ['ID', 'Nome Completo', 'Email', 'CPF/CNPJ', 'CEP', 'Estado', 'Fazenda', 'Observações'];
+    const headers = [
+      'ID',
+      'Nome Completo',
+      'Email',
+      'CPF/CNPJ',
+      'CEP',
+      'Estado',
+      'Fazenda',
+      'Observações',
+    ];
     const csvRows = [headers.join(',')];
-    
-    this.pecuaristas.forEach(p => {
+
+    this.pecuaristas.forEach((p) => {
       const row = [
         p.id,
         `"${p.nomeCompleto}"`,
@@ -135,11 +148,11 @@ export class MockDataService {
         p.cep,
         `"${p.estado}"`,
         `"${p.fazenda}"`,
-        `"${p.observacoes || ''}"`
+        `"${p.observacoes || ''}"`,
       ];
       csvRows.push(row.join(','));
     });
-    
+
     return csvRows.join('\n');
   }
 }
