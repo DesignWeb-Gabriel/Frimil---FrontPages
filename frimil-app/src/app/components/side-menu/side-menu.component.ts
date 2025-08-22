@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icons/icon.component';
 import { NavigationService } from '../../core/services/navigation.service';
+import { AuthService } from '../../core/services/auth.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -200,8 +202,16 @@ export class SideMenuComponent {
 
   constructor(
     private router: Router,
-    private navigationService: NavigationService
-  ) {}
+    private navigationService: NavigationService,
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {
+    // Obter dados do usuário atual do serviço de autenticação
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.currentUser = user;
+    }
+  }
 
   navigateTo(route: string): void {
     // Mapear rotas para nomes de página
@@ -254,22 +264,29 @@ export class SideMenuComponent {
 
   openSettings(): void {
     this.isUserMenuOpen = false;
-    // Implementar navegação para configurações
-    console.log('Abrindo configurações');
-    // this.router.navigate(['/settings']);
+    // Navegar para a página de configurações
+    this.router.navigate(['/settings']);
   }
 
-  logout(): void {
+    logout(): void {
     this.isUserMenuOpen = false;
-    // Implementar lógica de logout
-    console.log('Fazendo logout do usuário');
-
-    // Exemplo de implementação de logout
-    if (confirm('Tem certeza que deseja sair?')) {
-      // Limpar dados do usuário, tokens, etc.
-      localStorage.removeItem('user_token');
-      sessionStorage.clear();
-
+    
+    // Confirmar logout com o usuário
+    if (confirm('Tem certeza que deseja sair do sistema?')) {
+      // Usar o serviço de autenticação para fazer logout
+      this.authService.logout();
+      
+      // Limpar dados adicionais se necessário
+      if (typeof window !== 'undefined' && window.sessionStorage) {
+        sessionStorage.clear();
+      }
+      
+      // Mostrar notificação de sucesso
+      this.notificationService.showSuccess(
+        'Logout realizado com sucesso!',
+        'Você foi desconectado do sistema.'
+      );
+      
       // Redirecionar para página de login
       this.router.navigate(['/login']);
     }

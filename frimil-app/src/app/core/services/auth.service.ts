@@ -14,12 +14,14 @@ export class AuthService {
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   constructor() {
-    // Verificar se há usuário salvo no localStorage
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
-      const user = JSON.parse(savedUser);
-      this.currentUserSubject.next(user);
-      this.isAuthenticatedSubject.next(true);
+    // Verificar se há usuário salvo no localStorage (apenas no browser)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const savedUser = localStorage.getItem('currentUser');
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        this.currentUserSubject.next(user);
+        this.isAuthenticatedSubject.next(true);
+      }
     }
   }
 
@@ -39,7 +41,9 @@ export class AuthService {
           iniciais: 'UT',
         };
 
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        if (typeof window !== 'undefined' && window.localStorage) {
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        }
         this.currentUserSubject.next(user);
         this.isAuthenticatedSubject.next(true);
       }),
@@ -51,7 +55,9 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('currentUser');
+    }
     this.currentUserSubject.next(null);
     this.isAuthenticatedSubject.next(false);
   }
